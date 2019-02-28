@@ -3,6 +3,8 @@ package com.example.mobileui.injection.module
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.example.mobileui.injection.ViewModelFactory
+import com.example.presentation.BrowseProjectViewModel
+import com.example.presentation.state.BrowseBookmarkedViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -16,12 +18,12 @@ abstract class PresentationModule {
     @Binds
     @IntoMap
     @ViewModelKey(BrowseProjectViewModel::class)
-    abstract fun bindBrowseProjectsViewModel(viewModel: BrowseProjectsViewModel):ViewModel
+    abstract fun bindBrowseProjectViewModel(viewModel: BrowseProjectViewModel):ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(BrowseBookmarkedProjectViewModel::class)
-    abstract fun bindBrowseBookmarkedProjectsViewModel(viewModel: BrowseBookmarkedProjectViewModel):ViewModel
+    @ViewModelKey(BrowseBookmarkedViewModel::class)
+    abstract fun bindBrowseBookmarkedViewModel(viewModel: BrowseBookmarkedViewModel):ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

@@ -11,15 +11,15 @@ import javax.inject.Singleton
 
 @Module
 abstract class CacheModule {
-//    @Module
-//    companion object {
-//        @Provides
-//        @JvmStatic
-//        @Singleton
-//        fun providesDataBase(application: Application): ProjectsDatabase {
-//            return ProjectsDatabase.getInstance(application)
-//        }
-//    }
+    @Module
+    companion object {
+        @Provides
+        @JvmStatic
+        @Singleton
+        fun providesDataBase(application: Application): ProjectsDatabase {
+            return ProjectsDatabase.getInstance(application)
+        }
+    }
 
     @Binds
     abstract fun bindsProjectsCache(projectsCache: ProjectsCacheImpl): ProjectsCache

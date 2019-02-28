@@ -1,5 +1,7 @@
 package com.example.mobileui.bookmarked
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -7,6 +9,14 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.example.mobileui.R
+import com.example.mobileui.injection.ViewModelFactory
+import com.example.mobileui.mapper.ProjectViewMapper
+import com.example.mobileui.model.Project
+import com.example.presentation.model.ProjectView
+import com.example.presentation.state.BrowseBookmarkedViewModel
+import com.example.presentation.state.Resource
+import com.example.presentation.state.ResourceState
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_browse.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -27,6 +37,8 @@ class BookmarkedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bookmarked)
         AndroidInjection.inject(this)
+        browseBookmarkedViewModel = ViewModelProviders.of(this,viewModelFactory)
+            .get(BrowseBookmarkedViewModel::class.java)
         setupBrowseRecycler()
     }
 
@@ -64,7 +76,7 @@ class BookmarkedActivity : AppCompatActivity() {
     private fun setupScreenForSuccess(projects: List<Project>?){
         progress.visibility = View.GONE
         projects?.let {
-            adapter.projects = it
+            adapter.bookmarkedProjects = it
             adapter.notifyDataSetChanged()
             recycler_projects.visibility = View.VISIBLE
         } ?: run {

@@ -9,25 +9,10 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.mobileui.R
-import com.example.mobileui.browse.ProjectListener
 import com.example.mobileui.model.Project
 import javax.inject.Inject
 
-package com.example.mobileui.browse
-
-import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.example.mobileui.R
-import com.example.mobileui.model.Project
-import javax.inject.Inject
-
-class BookmarkedAdapter @Inject constructor(): RecyclerView.Adapter<BrowseAdapter.ViewHolder>(){
+class BookmarkedAdapter @Inject constructor(): RecyclerView.Adapter<BookmarkedAdapter.ViewHolder>(){
 
     var bookmarkedProjects: List<Project> = arrayListOf()
 
@@ -63,5 +48,4 @@ class BookmarkedAdapter @Inject constructor(): RecyclerView.Adapter<BrowseAdapte
             projectNameText = view.findViewById(R.id.text_project_name)
         }
     }
-
 }

@@ -45,7 +45,7 @@ class BrowseAdapter @Inject constructor(): RecyclerView.Adapter<BrowseAdapter.Vi
         holder.bookmarkedImage.setImageResource(starResource)
 
         holder.itemView.setOnClickListener {
-            if(project.isbookmarked){
+            if(project.isBookmarked){
                 projectListener?.onBookmarkedProjectClicked(project.id)
             }else{
                 projectListener?.onProjectClicked(project.id)

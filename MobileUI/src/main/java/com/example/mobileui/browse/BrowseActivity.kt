@@ -1,5 +1,7 @@
 package com.example.mobileui.browse
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -7,24 +9,34 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.example.mobileui.R
+import com.example.mobileui.bookmarked.BookmarkedActivity
+import com.example.mobileui.injection.ViewModelFactory
+import com.example.mobileui.mapper.ProjectViewMapper
+import com.example.mobileui.model.Project
+import com.example.presentation.BrowseProjectViewModel
+import com.example.presentation.model.ProjectView
+import com.example.presentation.state.Resource
+import com.example.presentation.state.ResourceState
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_browse.*
 import javax.inject.Inject
 
 class BrowseActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var adapter: ProjectAdapter
+    lateinit var adapter: BrowseAdapter
     @Inject
-    lateinit var mapper:ProjectViewMapper
+    lateinit var mapper: ProjectViewMapper
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    @Inject
-    private lateinit var browseViewModel: BrowseProjectsViewModel
+    private lateinit var browseViewModel: BrowseProjectViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_browse)
         AndroidInjection.inject(this)
+        browseViewModel = ViewModelProviders.of(this, viewModelFactory)
+            .get(BrowseProjectViewModel::class.java)
         setupBrowseRecycler()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -42,7 +54,7 @@ class BrowseActivity : AppCompatActivity() {
                     handleDatastate(resource)
                 }
             })
-        browseBookmarkedViewModel.fetchProjects()
+        browseViewModel.fetchProjects()
     }
 
     private fun handleDatastate(resource:Resource<List<ProjectView>>){
@@ -72,13 +84,14 @@ class BrowseActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         item?.let {
-            return when (item.itemId){
-                android.R.id.home -> {
-                    finish()
+            return when(it.itemId){
+                R.id.action_bookmarked->{
+                    startActivity(BookmarkedActivity.getStartIntent(this))
                     true
                 }else -> super.onOptionsItemSelected(item)
             }
         }
+        return true
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
