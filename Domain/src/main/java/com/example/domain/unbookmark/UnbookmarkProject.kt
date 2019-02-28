@@ -2,7 +2,7 @@ package com.example.domain.unbookmark
 
 import com.example.domain.executor.PostExecutionThread
 import com.example.domain.interactor.CompletableUseCase
-import com.teamo.clean.domain.repository.ProjectsRepository
+import com.example.domain.repository.ProjectsRepository
 import io.reactivex.Completable
 import java.lang.IllegalArgumentException
 import javax.inject.Inject

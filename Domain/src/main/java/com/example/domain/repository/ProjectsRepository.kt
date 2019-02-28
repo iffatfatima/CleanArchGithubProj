@@ -1,4 +1,4 @@
-package com.teamo.clean.domain.repository
+package com.example.domain.repository
 
 import com.example.domain.model.Project
 import io.reactivex.Completable

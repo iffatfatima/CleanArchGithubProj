@@ -1,11 +1,9 @@
 package com.example.domain.bookmarked
 
 import com.example.domain.executor.PostExecutionThread
-import com.example.domain.interactor.CompletableUseCase
 import com.example.domain.interactor.ObservableUseCase
 import com.example.domain.model.Project
-import com.teamo.clean.domain.repository.ProjectsRepository
-import io.reactivex.Completable
+import com.example.domain.repository.ProjectsRepository
 import io.reactivex.Observable
 import javax.inject.Inject
 

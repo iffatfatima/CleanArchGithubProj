@@ -3,7 +3,7 @@ package com.example.domain.interactor.browse
 import com.example.domain.executor.PostExecutionThread
 import com.example.domain.interactor.ObservableUseCase
 import com.example.domain.model.Project
-import com.teamo.clean.domain.repository.ProjectsRepository
+import com.example.domain.repository.ProjectsRepository
 import io.reactivex.Observable
 import javax.inject.Inject
 

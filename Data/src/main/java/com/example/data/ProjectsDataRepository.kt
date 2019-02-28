@@ -4,7 +4,7 @@ import com.example.data.mapper.ProjectMapper
 import com.example.data.repository.ProjectsCache
 import com.example.data.store.ProjectsDataStoreFactory
 import com.example.domain.model.Project
-import com.teamo.clean.domain.repository.ProjectsRepository
+import com.example.domain.repository.ProjectsRepository
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
@@ -14,7 +14,7 @@ class ProjectsDataRepository @Inject constructor(
     private val mapper: ProjectMapper,
     private val cache: ProjectsCache,
     private val projectsDataStoreFactory: ProjectsDataStoreFactory
-) : ProjectsRepository{
+) : ProjectsRepository {
 
     override fun getProjects(): Observable<List<Project>> {
         return Observable.zip(cache.areProjectsCached().toObservable(),

@@ -2,9 +2,7 @@ package com.example.domain.bookmark
 
 import com.example.domain.executor.PostExecutionThread
 import com.example.domain.interactor.CompletableUseCase
-import com.example.domain.model.Project
-import com.sun.xml.internal.ws.util.CompletedFuture
-import com.teamo.clean.domain.repository.ProjectsRepository
+import com.example.domain.repository.ProjectsRepository
 import io.reactivex.Completable
 import javax.inject.Inject
 

@@ -1,0 +1,122 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+    defaultConfig {
+        applicationId "com.example.mobileui"
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+        testInstrumentationRunner "com.teamo.mobileui.test.TestRunner"
+
+        multiDexEnabled true
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+kapt {
+    generateStubs = true
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    def dependencies = rootProject.ext.mobileUIDependencies
+    def testDependencies = rootProject.ext.mobileUITestDependencies
+
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+
+    implementation project(":Presentation")
+    implementation project(":Data")
+    implementation project(":Remote")
+    implementation project(":cache")
+
+    implementation dependencies.dex
+
+    implementation dependencies.constraintLayout
+    implementation dependencies.javaxAnnotation
+    implementation dependencies.kotlin
+    implementation dependencies.javaxInject
+    implementation dependencies.androidAnnotations
+    implementation dependencies.androidSupportV4
+    implementation dependencies.androidSupportV13
+    implementation dependencies.appCompatV7
+    implementation dependencies.supportRecyclerView
+    implementation dependencies.supportDesign
+    implementation dependencies.timber
+    implementation dependencies.rxKotlin
+    implementation dependencies.rxAndroid
+    implementation dependencies.rxJava
+
+    implementation dependencies.glide
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    kapt dependencies.glideCompiler
+
+    implementation dependencies.dagger
+    implementation dependencies.daggerSupport
+    kapt dependencies.daggerCompiler
+    kapt dependencies.daggerProcessor
+
+
+    implementation dependencies.archRuntime
+    implementation dependencies.archExtensions
+    kapt dependencies.archCompiler
+    implementation dependencies.roomRxJava
+
+    compileOnly dependencies.glassfishAnnotation
+
+    testImplementation testDependencies.kotlinJUnit
+    testImplementation testDependencies.junit
+
+    androidTestImplementation testDependencies.mockito
+
+    androidTestImplementation testDependencies.mockitoAndroid
+
+    androidTestImplementation(testDependencies.espressoCore) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation(testDependencies.supportRunner) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation(testDependencies.supportRules) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation(testDependencies.espressoIntents) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+
+    androidTestImplementation(testDependencies.espressoContrib) {
+        exclude module: 'appcompat'
+        exclude module: 'appcompat-v7'
+        exclude module: 'support-v4'
+        exclude module: 'support-v13'
+        exclude module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+        exclude module: 'design'
+    }
+
+    kaptTest dependencies.daggerCompiler
+    kaptAndroidTest dependencies.daggerCompiler
+}
