@@ -2,6 +2,7 @@ package com.example.mobileui.browse
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -28,11 +29,11 @@ class BrowseActivity: AppCompatActivity() {
     @Inject lateinit var viewModelFactory: ViewModelFactory
     private lateinit var browseViewModel: BrowseProjectViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_browse)
-        AndroidInjection.inject(this)
 
         browseViewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(BrowseProjectViewModel::class.java)
@@ -61,7 +62,7 @@ class BrowseActivity: AppCompatActivity() {
         item?.let {
             return when(it.itemId){
                 R.id.action_bookmarked->{
-                    startActivity(BookmarkedActivity.getStartIntent(this))
+                    startActivity(Intent(this, BookmarkedActivity::class.java))
                     true
                 }else -> super.onOptionsItemSelected(item)
             }

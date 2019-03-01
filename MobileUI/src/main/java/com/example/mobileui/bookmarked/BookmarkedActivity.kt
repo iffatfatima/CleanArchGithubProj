@@ -28,16 +28,16 @@ class BookmarkedActivity: AppCompatActivity(){
     @Inject lateinit var viewModelFactory: ViewModelFactory
     @Inject lateinit var browseBookmarkedViewModel: BrowseBookmarkedViewModel
 
-    companion object {
-        fun getStartIntent(context: Context): Intent {
-            return Intent(context, BookmarkedActivity::class.java)
-        }
-    }
+//    companion object {
+//        fun getStartIntent(context: Context): Intent {
+//            return Intent(context, BookmarkedActivity::class.java)
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bookmarked)
-        AndroidInjection.inject(this)
 
         browseBookmarkedViewModel = ViewModelProviders.of(this,viewModelFactory)
             .get(BrowseBookmarkedViewModel::class.java)

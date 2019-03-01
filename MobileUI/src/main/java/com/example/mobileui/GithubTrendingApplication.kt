@@ -2,6 +2,7 @@ package com.example.mobileui
 
 import android.app.Activity
 import android.app.Application
+import com.example.mobileui.injection.DaggerApplicationComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -16,6 +17,7 @@ class GithubTrendingApplication: Application(), HasActivityInjector {
     override  fun activityInjector(): AndroidInjector<Activity>{
         return androidInjector
     }
+
     override fun onCreate(){
         super.onCreate()
         setupTimber()
