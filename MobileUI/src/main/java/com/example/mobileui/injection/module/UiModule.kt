@@ -9,16 +9,14 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class UiModule{
+abstract class UiModule {
 
     @Binds
-    abstract fun bindPostExecutionThread(uiThread: UiThread): PostExecutionThread
+    abstract fun bindPostExecutionThread(uiThread: UiThread):PostExecutionThread
 
     @ContributesAndroidInjector
     abstract fun contributesBrowseActivity(): BrowseActivity
 
     @ContributesAndroidInjector
     abstract fun contributesBookmarkedActivity(): BookmarkedActivity
-
-
 }

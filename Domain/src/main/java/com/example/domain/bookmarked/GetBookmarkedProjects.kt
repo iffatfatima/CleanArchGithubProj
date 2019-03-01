@@ -8,7 +8,7 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 open class GetBookmarkedProjects @Inject constructor(
-    val projectsRepository: ProjectsRepository,
+    private val projectsRepository: ProjectsRepository,
     postExecutionThread: PostExecutionThread
 
 ) : ObservableUseCase<List<Project>, Nothing?>(postExecutionThread) {

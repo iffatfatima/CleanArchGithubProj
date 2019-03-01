@@ -2,14 +2,12 @@ package com.example.mobileui.injection.module
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.example.mobileui.injection.ViewModelFactory
+import com.example.presentation.BrowseBookmarkedViewModel
 import com.example.presentation.BrowseProjectViewModel
-import com.example.presentation.state.BrowseBookmarkedViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
 import dagger.multibindings.IntoMap
-import javax.inject.Inject
 import kotlin.reflect.KClass
 
 @Module

@@ -1,4 +1,4 @@
-package com.example.presentation.state
+package com.example.presentation
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
@@ -7,6 +7,8 @@ import com.example.domain.bookmarked.GetBookmarkedProjects
 import com.example.domain.model.Project
 import com.example.presentation.mapper.ProjectViewMapper
 import com.example.presentation.model.ProjectView
+import com.example.presentation.state.Resource
+import com.example.presentation.state.ResourceState
 import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
 
@@ -26,20 +28,38 @@ class BrowseBookmarkedViewModel @Inject constructor(
     }
 
     fun fetchProjects(){
-        liveData.postValue(Resource(ResourceState.LOADING, null, null))
+        liveData.postValue(
+            Resource(
+                ResourceState.LOADING,
+                null,
+                null
+            )
+        )
         return getBookmarkedProjects.execute(ProjectsSubscriber(), null)
     }
 
     inner class ProjectsSubscriber: DisposableObserver<List<Project>>(){
 
         override fun onNext(t: List<Project>) {
-            liveData.postValue(Resource(ResourceState.SUCCESS, t.map { project -> mapper.mapToView(project) }, null))
+            liveData.postValue(
+                Resource(
+                    ResourceState.SUCCESS,
+                    t.map { project -> mapper.mapToView(project) },
+                    null
+                )
+            )
         }
 
         override fun onComplete() {}
 
         override fun onError(e: Throwable) {
-            liveData.postValue(Resource(ResourceState.ERROR, null, e.localizedMessage))
+            liveData.postValue(
+                Resource(
+                    ResourceState.ERROR,
+                    null,
+                    e.localizedMessage
+                )
+            )
         }
     }
 

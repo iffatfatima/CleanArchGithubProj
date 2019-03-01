@@ -21,7 +21,9 @@ android {
     }
 
 }
-
+kapt {
+    generateStubs = true
+}
 dependencies {
     def dependencies = rootProject.ext.cacheDependencies
     def testDependencies = rootProject.ext.cacheTestDependencies

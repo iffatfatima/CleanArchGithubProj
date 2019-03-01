@@ -133,7 +133,9 @@ ext{
             mockito:                "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoVersion}",
             assertj:                "org.assertj:assertj-core:${assertJVersion}",
             robolectric:            "org.robolectric:robolectric:${robolectricVersion}",
-            archTesting:            "android.arch.core:core-testing:${roomVersion}"
+            archTesting:            "android.arch.core:core-testing:${roomVersion}",
+            mockitoinline:      "org.mockito:mockito-inline:${mockitoAndroidVersion}",
+
     ]
 
     mobileUIDependencies = [

@@ -10,7 +10,8 @@ import javax.inject.Inject
 
 class GithubTrendingApplication: Application(), HasActivityInjector {
 
-    @Inject lateinit var androidInjector: DispatchingAndroidInjector<Activity>
+    @Inject
+    lateinit var androidInjector: DispatchingAndroidInjector<Activity>
 
     override  fun activityInjector(): AndroidInjector<Activity>{
         return androidInjector

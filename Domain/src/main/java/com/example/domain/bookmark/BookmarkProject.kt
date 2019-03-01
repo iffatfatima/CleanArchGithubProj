@@ -7,7 +7,7 @@ import io.reactivex.Completable
 import javax.inject.Inject
 
 open class BookmarkProject @Inject constructor(
-    val projectsRepository: ProjectsRepository,
+    private val projectsRepository: ProjectsRepository,
     postExecutionThread: PostExecutionThread
 ): CompletableUseCase<BookmarkProject.Params>(postExecutionThread){
     public override fun buildUseCaseCompletable(params: Params?): Completable {

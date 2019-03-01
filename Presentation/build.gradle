@@ -74,5 +74,7 @@ dependencies {
     testImplementation testDependencies.assertj
     testImplementation testDependencies.robolectric
     testImplementation testDependencies.archTesting
+    testImplementation testDependencies.mockitoinline
+
 
 }
