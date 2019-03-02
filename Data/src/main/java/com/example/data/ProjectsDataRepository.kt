@@ -7,6 +7,7 @@ import com.example.domain.model.Project
 import com.example.domain.repository.ProjectsRepository
 import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 import javax.inject.Inject
 
@@ -21,7 +22,7 @@ class ProjectsDataRepository @Inject constructor(
             cache.areProjectsCached().toObservable(),
             cache.isProjectCacheExpired().toObservable(),
             BiFunction<Boolean, Boolean, Pair<Boolean, Boolean>>{areCached, isExpired ->
-                Pair(areCached, isExpired)
+                Pair(false, true)
             })
             .flatMap {
                 projectsDataStoreFactory.getDataStore(it.first, it.second).getProjects()
@@ -33,6 +34,16 @@ class ProjectsDataRepository @Inject constructor(
             }.map { it.map { project ->
                 mapper.mapFromEntity(project) }
             }
+/*        val ret = projectsDataStoreFactory.getDataStore(false, true).getProjects()
+            .flatMap { projects ->
+                projectsDataStoreFactory
+                    .getCacheDataStore()
+                    .saveProjects(projects)
+                    .andThen(Observable.just(projects))
+            }.map { it.map { project ->
+                mapper.mapFromEntity(project) }
+            }
+        return ret*/
     }
 
 

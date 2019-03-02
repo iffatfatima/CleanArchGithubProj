@@ -12,7 +12,6 @@ data class CachedProject (
     var id: String,
     var name: String,
     var fullName: String,
-    var starCount: String,
     var dateCreated: String,
     var ownerName: String,
     var ownerAvatar: String,

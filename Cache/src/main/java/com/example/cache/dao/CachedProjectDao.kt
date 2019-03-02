@@ -7,12 +7,13 @@ import android.arch.persistence.room.Query
 import com.example.cache.db.ProjectConstants
 import com.example.cache.model.CachedProject
 import io.reactivex.Flowable
+import io.reactivex.Single
 
 @Dao
 abstract class CachedProjectDao{
 
     @Query(ProjectConstants.QUERY_PROJECTS)
-    abstract fun getProjects(): Flowable<List<CachedProject>>
+    abstract fun getProjects(): Single<List<CachedProject>>
 
     @Query(ProjectConstants.DELETE_PROJECTS)
     abstract fun deleteProjects()
@@ -21,9 +22,9 @@ abstract class CachedProjectDao{
     abstract fun insertProjects(projects:List<CachedProject>)
 
     @Query(ProjectConstants.QUERY_BOOKMARKED_PROJECTS)
-    abstract fun getBookmarkedProjects():Flowable<List<CachedProject>>
+    abstract fun getBookmarkedProjects():Single<List<CachedProject>>
 
     @Query(ProjectConstants.QUERY_UPDATE_BOOKMARKED_PROJECTS)
-    abstract fun setBookmarkStatus(isBookmarked:Boolean, projectId: String)
+    abstract fun setBookmarkStatus(isBookmarked:Boolean, projectId: String) : Int
 
 }
