@@ -39,13 +39,11 @@ public class BrowseProjectViewModel @Inject constructor(
     }
 
     fun bookmarkProject(projectId: String){
-        liveData.postValue(Resource(ResourceState.LOADING, null,null))
         return bookmarkProject.execute(BookmarkProjectsSubscriber(), BookmarkProject.Params.forProject(projectId))
     }
 
     fun unbookmarkProject(projectId: String){
-        liveData.postValue(Resource(ResourceState.LOADING, null,null))
-        return unbookmarkProject.execute(BookmarkProjectsSubscriber(), UnbookmarkProject.Params.forProject(projectId))
+        return unbookmarkProject.execute(UnBookmarkProjectsSubscriber(), UnbookmarkProject.Params.forProject(projectId))
     }
 
     inner class ProjectsSubscriber: DisposableObserver<List<Project>>() {
@@ -63,12 +61,21 @@ public class BrowseProjectViewModel @Inject constructor(
 
     inner class BookmarkProjectsSubscriber: DisposableCompletableObserver() {
         override fun onComplete() {
-            liveData.postValue(Resource(ResourceState.SUCCESS,null, null))
+            liveData.postValue(Resource(ResourceState.SUCCESS, liveData.value?.data, null))
         }
 
         override fun onError(e: Throwable) {
             liveData.postValue(Resource(ResourceState.ERROR, null, e.localizedMessage))
         }
 
+    }
+    inner class UnBookmarkProjectsSubscriber: DisposableCompletableObserver() {
+        override fun onComplete() {
+            liveData.postValue(Resource(ResourceState.SUCCESS, liveData.value?.data, null))
+        }
+
+        override fun onError(e: Throwable) {
+            liveData.postValue(Resource(ResourceState.ERROR, liveData.value?.data, e.localizedMessage))
+        }
     }
 }

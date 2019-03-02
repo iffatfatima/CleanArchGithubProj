@@ -2,15 +2,16 @@ package com.example.data.store
 
 import com.example.data.model.ProjectEntity
 import com.example.data.repository.ProjectsDataStore
+import com.example.data.repository.ProjectsRemote
 import io.reactivex.Completable
 import io.reactivex.Observable
 import javax.inject.Inject
 
 public class ProjectsRemoteDataStore @Inject constructor(
-    private val projectsRemoteDataStore: ProjectsRemoteDataStore
+    private val  projectsRemote: ProjectsRemote
 ): ProjectsDataStore{
     override fun getProjects(): Observable<List<ProjectEntity>> {
-        return projectsRemoteDataStore.getProjects()
+        return projectsRemote.getProjects()
     }
 
     override fun saveProjects(projects: List<ProjectEntity>): Completable {

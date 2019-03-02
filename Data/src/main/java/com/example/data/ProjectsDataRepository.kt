@@ -17,23 +17,21 @@ class ProjectsDataRepository @Inject constructor(
 ) : ProjectsRepository {
 
     override fun getProjects(): Observable<List<Project>> {
-        return Observable.zip(cache.areProjectsCached().toObservable(),
+        return Observable.zip(
+            cache.areProjectsCached().toObservable(),
             cache.isProjectCacheExpired().toObservable(),
-            BiFunction<Boolean, Boolean, Pair<Boolean, Boolean>> { areProjectsCached, isExpired ->
-                Pair(areProjectsCached, isExpired)
+            BiFunction<Boolean, Boolean, Pair<Boolean, Boolean>>{areCached, isExpired ->
+                Pair(areCached, isExpired)
             })
-            .flatMap{selectionPair ->
-                projectsDataStoreFactory.getDataStore(selectionPair.first, selectionPair.second).getProjects()
-            }
-            .flatMap{projectsList ->
-                projectsDataStoreFactory.getCacheDataStore()
-                    .saveProjects(projectsList)
-                    .andThen(Observable.just(projectsList))
-            }
-            .map { projectsList ->
-                projectsList.map{ projectEntity ->
-                    mapper.mapFromEntity(projectEntity)
-                }
+            .flatMap {
+                projectsDataStoreFactory.getDataStore(it.first, it.second).getProjects()
+            }.flatMap { projects ->
+                projectsDataStoreFactory.
+                    getCacheDataStore().
+                    saveProjects(projects)
+                    .andThen(Observable.just(projects))
+            }.map { it.map { project ->
+                mapper.mapFromEntity(project) }
             }
     }
 

@@ -11,7 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import com.example.mobileui.R
 import com.example.mobileui.bookmarked.BookmarkedActivity
-import com.example.mobileui.injection.ViewModelFactory
+import com.example.mobileui.injection.module.ViewModelFactory
 import com.example.mobileui.mapper.ProjectViewMapper
 import com.example.mobileui.model.Project
 import com.example.presentation.BrowseProjectViewModel

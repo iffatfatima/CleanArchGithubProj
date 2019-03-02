@@ -10,7 +10,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import com.example.mobileui.R
-import com.example.mobileui.injection.ViewModelFactory
+import com.example.mobileui.injection.module.ViewModelFactory
 import com.example.mobileui.mapper.ProjectViewMapper
 import com.example.mobileui.model.Project
 import com.example.presentation.model.ProjectView
@@ -28,11 +28,11 @@ class BookmarkedActivity: AppCompatActivity(){
     @Inject lateinit var viewModelFactory: ViewModelFactory
     @Inject lateinit var browseBookmarkedViewModel: BrowseBookmarkedViewModel
 
-//    companion object {
-//        fun getStartIntent(context: Context): Intent {
-//            return Intent(context, BookmarkedActivity::class.java)
-//        }
-//    }
+    companion object {
+        fun getStartIntent(context: Context): Intent {
+            return Intent(context, BookmarkedActivity::class.java)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
