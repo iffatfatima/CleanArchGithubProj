@@ -43,7 +43,7 @@ public class BrowseProjectViewModel @Inject constructor(
     }
 
     fun unbookmarkProject(projectId: String){
-        return unbookmarkProject.execute(UnBookmarkProjectsSubscriber(), UnbookmarkProject.Params.forProject(projectId))
+        return unbookmarkProject.execute(BookmarkProjectsSubscriber(), UnbookmarkProject.Params.forProject(projectId))
     }
 
     inner class ProjectsSubscriber: DisposableObserver<List<Project>>() {

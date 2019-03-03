@@ -14,7 +14,7 @@ class ProjectsRemoteImpl @Inject constructor(
     override fun getProjects(): Observable<List<ProjectEntity>> {
         return service.searchRepositories("language:kotlin", "stars", "desc")
             .map {  projectResponseModel ->
-                projectResponseModel.projectItems.map { projectModel ->
+                projectResponseModel.items.map { projectModel ->
                     mapper.mapFromModel(projectModel) }
             }
     }

@@ -6,8 +6,7 @@ import javax.inject.Inject
 
 class ProjectResponseModelMapper  @Inject constructor(): ModelMapper<ProjectModel, ProjectEntity>{
     override fun mapFromModel(model: ProjectModel): ProjectEntity {
-        return ProjectEntity(model.id, model.name, model.fullName,
-             model.dateCreated, model.owner.ownerName, model.owner.ownerAvatar, false)
+        return ProjectEntity(model.id, model.name, model.fullName, model.dateCreated, model.owner.ownerName, model.owner.ownerAvatar, false)
     }
 
 }

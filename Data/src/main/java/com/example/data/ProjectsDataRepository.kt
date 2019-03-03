@@ -22,7 +22,7 @@ class ProjectsDataRepository @Inject constructor(
             cache.areProjectsCached().toObservable(),
             cache.isProjectCacheExpired().toObservable(),
             BiFunction<Boolean, Boolean, Pair<Boolean, Boolean>>{areCached, isExpired ->
-                Pair(false, true)
+                Pair(areCached, isExpired)
             })
             .flatMap {
                 projectsDataStoreFactory.getDataStore(it.first, it.second).getProjects()
@@ -34,16 +34,7 @@ class ProjectsDataRepository @Inject constructor(
             }.map { it.map { project ->
                 mapper.mapFromEntity(project) }
             }
-/*        val ret = projectsDataStoreFactory.getDataStore(false, true).getProjects()
-            .flatMap { projects ->
-                projectsDataStoreFactory
-                    .getCacheDataStore()
-                    .saveProjects(projects)
-                    .andThen(Observable.just(projects))
-            }.map { it.map { project ->
-                mapper.mapFromEntity(project) }
-            }
-        return ret*/
+
     }
 
 

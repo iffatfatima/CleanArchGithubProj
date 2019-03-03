@@ -1,7 +1,5 @@
 package com.example.remote.service
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,10 +15,10 @@ object GithubTrendingServiceFactory {
         val okHttpClient = makeOkHttpClient(
             makeLoggingInterceptor(isDebug)
         )
-        return makeGithubTrendingService(okHttpClient, makeGson())
+        return makeGithubTrendingService(okHttpClient)
     }
 
-    private fun makeGithubTrendingService(okHttpClient: OkHttpClient, gson: Gson): GithubTrendingService {
+    private fun makeGithubTrendingService(okHttpClient: OkHttpClient): GithubTrendingService {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.github.com/")
             .client(okHttpClient)
@@ -46,11 +44,5 @@ object GithubTrendingServiceFactory {
             HttpLoggingInterceptor.Level.NONE
         }
         return logging
-    }
-
-    private fun makeGson(): Gson {
-        return GsonBuilder()
-            .setLenient()
-            .create()
     }
 }
