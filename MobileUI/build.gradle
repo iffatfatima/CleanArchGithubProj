@@ -16,10 +16,7 @@ android {
         applicationId "com.example.mobileui"
         minSdkVersion globalConfiguration["androidMinSdkVersion"]
         targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
-        testInstrumentationRunner "com.teamo.mobileui.test.TestRunner"
-
-        multiDexEnabled true
-
+        testInstrumentationRunner "com.example.mobileui.test.TestRunner"
     }
 
     buildTypes {
@@ -36,7 +33,9 @@ android {
 
 }
 
-
+kapt {
+    generateStubs = true
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -86,7 +85,7 @@ dependencies {
 
     testImplementation testDependencies.kotlinJUnit
     testImplementation testDependencies.junit
-
+    testImplementation testDependencies.mockitoCore
     androidTestImplementation testDependencies.mockito
 
     androidTestImplementation testDependencies.mockitoAndroid
@@ -94,8 +93,7 @@ dependencies {
     androidTestImplementation(testDependencies.espressoCore) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestImplementation(testDependencies.supportRunner) {
-        exclude group: 'com.android.support', module: 'support-annotations'
+    implementation(testDependencies.supportRunner) {
     }
     androidTestImplementation(testDependencies.supportRules) {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -116,4 +114,5 @@ dependencies {
 
     kaptTest dependencies.daggerCompiler
     kaptAndroidTest dependencies.daggerCompiler
+
 }

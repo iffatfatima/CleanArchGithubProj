@@ -39,9 +39,8 @@ ext{
     espressoVersion = "3.0.2"
 
     oldMockitoKotlinVersion = "1.5.0"
-    mobileUIMockitoAndroidVersion = "2.8.9"
+    mobileUIMockitoAndroidVersion = "2.23.0"
     dexmakerMockitoversion = '2.2.0'
-//    mobileUIMockitoAndroidVersion = "2.23.4"
 
     domainDependencies = [
             kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
@@ -173,7 +172,8 @@ ext{
             junit:              "junit:junit:${jUnitVersion}",
             kotlinJUnit:        "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
             assertj:            "org.assertj:assertj-core:${assertJVersion}",
-            mockito:            "com.nhaarman:mockito-kotlin:${oldMockitoKotlinVersion}",
+            mockito:            "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoVersion}",
+            mockitoCore:        "org.mockito:mockito-core:$mobileUIMockitoAndroidVersion",
             supportRunner:      "com.android.support.test:runner:${androidSupportRunnerVersion}",
             supportRules:       "com.android.support.test:rules:${androidSupportRulesVersion}",
             mockitoAndroid:     "org.mockito:mockito-android:${mobileUIMockitoAndroidVersion}",

@@ -4,7 +4,7 @@ import com.example.domain.model.Project
 import io.reactivex.Completable
 import io.reactivex.Observable
 
-interface ProjectsRepository {
+public interface ProjectsRepository {
 
     fun getProjects(): Observable<List<Project>>
 

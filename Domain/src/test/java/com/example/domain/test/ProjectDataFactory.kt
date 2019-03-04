@@ -15,7 +15,7 @@ object ProjectDataFactory {
     }
 
     fun makeProject() : Project{
-        return Project(randomUuid(), randomUuid(), randomUuid(), randomUuid(), randomUuid(), randomUuid(), randomUuid(), randomBoolean())
+        return Project(randomUuid(), randomUuid(), randomUuid(), randomUuid(), randomUuid(), randomUuid(), randomBoolean())
     }
 
     fun randomInt(): Int{
